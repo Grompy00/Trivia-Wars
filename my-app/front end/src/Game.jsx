@@ -167,7 +167,6 @@ function Game() {
     }
     autoNextTimeoutRef.current = setTimeout(() => {
       socket.emit('next_question', joinCode);
-      setQuestionCount((prev) => prev + 1);
     }, 5000);
   }
 
