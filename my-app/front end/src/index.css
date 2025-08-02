@@ -366,33 +366,44 @@ main button {
 }
 
 @media (max-width: 480px) {
+  .game-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5em;
+    margin: 1em 0;
+  }
+
   .heading-container header {
     font-size: 1.2em;
   }
+
   .heading-container nav {
     font-size: 0.8em;
   }
-  .game-container {
-    padding: 0.2em;
-  }
+
   .question-heading {
     font-size: 1.2em;
   }
+
   .question {
     font-size: 1em;
   }
+
   .answer {
     font-size: 0.9em;
     padding: 0.3em;
   }
+
   #score {
     font-size: 1em;
   }
+
   .leaderboard {
     font-size: 0.9em;
     padding: 0.5em;
   }
 }
+
 
 /* Hide absolute positioning for answers on mobile */
 @media (max-width: 768px) {
