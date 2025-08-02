@@ -1,0 +1,426 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html{
+  overflow-x:hidden
+}
+
+body {
+  background-color: black;
+  font-family: "Bebas Neue", Arial, sans-serif;
+  color: white;
+  min-height: 100vh;
+}
+
+/* Responsive grid for root */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+/* Heading styles */
+.heading-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1em;
+}
+
+.heading-container header {
+  display: flex;
+  align-items: center; /* Vertically center nav with Trivia Wars */
+  gap: 2em;
+  font-size: 3em;
+  margin-bottom: 0.1em;
+  white-space: nowrap;
+  color: white;
+  text-decoration: none;
+}
+
+.heading-container header a {
+  color: white;
+  text-decoration: none;
+}
+
+
+.heading-container nav {
+  height: 100%; /* Take full height of header */
+  display: flex;
+  align-items: center; /* Vertically center nav items */
+}
+
+.heading-container nav ul {
+  display: flex;
+  gap: 1.5em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center; /* Vertically center list items */
+  height: 100%;
+}
+
+.heading-container nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  transition: color 0.2s, text-decoration 0.2s;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.heading-container nav ul li a:hover {
+  color: #ffd700;
+  text-decoration: underline;
+}
+
+/* Add this style for the hr under the heading */
+.heading-container hr {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #fff;
+  margin: 0.2em 0 1em 0;
+}
+
+/* Main body styles */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1em;
+  color: white;
+  padding: 2em 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+main h1, main h2 {
+  text-align: center;
+}
+
+main button {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  padding: 1em;
+  font-size: 1em;
+  margin: 1em 0;
+  cursor: pointer;
+}
+
+/* Create Game & Join Lobby forms */
+.create-game,
+.joinLobby {
+  width: 100%;
+  max-width: 500px;
+  margin: 2em auto;
+}
+
+.create-game form,
+.joinLobby form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: stretch;
+  font-size: 1.5em;
+}
+
+.create-game input,
+.joinLobby input {
+  height: 2em;
+  font-size: 1em;
+  padding: 0.5em;
+  border: 1px solid white;
+  background: black;
+  color: white;
+  border-radius: 4px;
+}
+
+.gameButton,
+.joinButton,
+.playNowButton,
+.createLobbyButton,
+.startGameButton {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 1em;
+  padding: 0.7em;
+  border-radius: 4px;
+  border: none;
+  background: #222;
+  color: white;
+  transition: background 0.2s, transform 0.2s;
+  margin: 1em 0;
+  cursor: pointer;
+}
+
+.gameButton:hover,
+.joinButton:hover,
+.playNowButton:hover,
+.createLobbyButton:hover,
+.startGameButton:hover {
+  background: #444;
+  transform: scale(1.05);
+}
+
+.playNowButton {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 1em;
+  padding: 0.7em;
+  border-radius: 4px;
+  border: none;
+  background: #222;
+  color: white;
+  transition: background 0.2s;
+  margin: 1em 0;
+  cursor: pointer;
+}
+
+.playNowButton:hover {
+  background: #444;
+}
+
+/* Game container */
+.game-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 2em auto;
+  padding: 1em;
+  background: rgba(0,0,0,0.7);
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.game-container.game-over {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.question-heading {
+  margin-top: -2em;
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.question {
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 1em;
+  word-break: break-word;
+}
+
+.answer {
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5em auto;
+  padding: 0.5em;
+  border: 2px solid white;
+  border-radius: 6px;
+  text-align: center;
+  background: #111;
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s;
+}
+
+.answer.selected {
+  border: 3px solid yellow;
+}
+
+.answer.correct {
+  background-color: #388e3c;
+}
+
+.answer.incorrect {
+  background-color: #c62828;
+}
+
+.timer {
+  font-size: 1.2em;
+  text-align: center;
+  margin: 1em 0;
+}
+
+#score {
+  font-size: 1.5em;
+  text-align: center;
+  margin: 1em 0;
+}
+
+.leaderboard {
+  margin-top: 2em;
+  padding: 1em;
+  border: 2px solid white;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.leaderboard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.leaderboard li {
+  font-size: 1.2em;
+  margin: 0.3em 0;
+}
+
+/* Lobby container styles */
+.lobby-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top:0em;
+  text-align: center;
+}
+.lobby-container h2{
+  font-size: 4em;
+}
+.lobby-container h3{
+  font-size:2.6em
+}
+.lobby-container li{
+  font-size: 2em;
+}
+.game-top-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  position: relative; /* Needed for absolute positioning of child */
+}
+
+.question-heading {
+  flex: 1;
+  text-align: center;
+}
+
+.leaderboard-top-right {
+  position: absolute;
+  top: -4em;
+  right: -18em;
+  min-width: 220px;
+  max-width: 300px;
+  margin: 0;
+  text-align: left;
+  z-index: 2;
+}
+
+/* Responsive media queries */
+
+@media (max-width: 768px) {
+  .heading-container header {
+    font-size: 2em;
+  }
+  .heading-container nav {
+    font-size: 1em;
+  }
+  .game-container {
+    max-width: 95vw;
+    padding: 0.5em;
+  }
+  .answer {
+    max-width: 95vw;
+    font-size: 1em;
+  }
+  .leaderboard {
+    max-width: 95vw;
+    font-size: 1em;
+  }
+  .game-top-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  /* Hide leaderboard on mobile screens */
+  .leaderboard,
+  .leaderboard-top-right {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading-container header {
+    font-size: 1.2em;
+  }
+  .heading-container nav {
+    font-size: 0.8em;
+  }
+  .game-container {
+    padding: 0.2em;
+  }
+  .question-heading {
+    font-size: 1.2em;
+  }
+  .question {
+    font-size: 1em;
+  }
+  .answer {
+    font-size: 0.9em;
+    padding: 0.3em;
+  }
+  #score {
+    font-size: 1em;
+  }
+  .leaderboard {
+    font-size: 0.9em;
+    padding: 0.5em;
+  }
+}
+
+/* Hide absolute positioning for answers on mobile */
+@media (max-width: 768px) {
+  #answer-one, #answer-two, #answer-three, #answer-four {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    margin: 0.5em 0 !important;
+  }
+}
+
+.join-form-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.gameButton {
+  font-family: "Bebas Neue", Arial, sans-serif;
+  font-size: 1em;
+  padding: 0.7em;
+  border-radius: 4px;
+  border: none;
+  background: #222;
+  color: white;
+  transition: background 0.2s;
+  margin: 1em 0;
+  cursor: pointer;
+}
+
+.gameButton:hover {
+  background: #444;
+}
