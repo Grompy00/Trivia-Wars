@@ -322,6 +322,7 @@ main button {
 
 /* Responsive media queries */
 
+
 @media (max-width: 768px) {
   .heading-container header {
     font-size: 2em;
@@ -349,6 +350,18 @@ main button {
   .leaderboard,
   .leaderboard-top-right {
     display: none !important;
+  }
+   .game-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5em;
+    margin: 1em 0;
+    box-sizing: border-box;
+  }
+  main {
+    width: 100%;
+    padding: 1em 0.5em;
+    box-sizing: border-box;
   }
 }
 
