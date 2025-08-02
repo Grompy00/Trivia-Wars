@@ -6,7 +6,7 @@ const { getDataFromDatabase } = require('./database');
 
 const app = express();
 app.use(cors({
-  origin: ['https://triviawars.xyz', 'https://grompy00.github.io'],
+  origin: ['https://triviawars.xyz', 'https://grompy00.github.io', 'https://www.triviawars.xyz'],
   methods: ['GET', 'POST'],
   credentials: true
 }));
