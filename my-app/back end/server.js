@@ -19,8 +19,6 @@ const io = new Server(server, {
   }
 });
 
-const port = process.env.PORT || 3000;
-
 let allQuestions = [];
 const playersByRoom = {};
 const questionsAskedByRoom = {};
@@ -178,6 +176,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(port, '0.0.0.0',() => {
-  console.log(`Server running at http://localhost:${port}`);
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
