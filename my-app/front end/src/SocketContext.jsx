@@ -8,10 +8,13 @@ export const SocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io('https://trivia-wars-production.up.railway.app');
+    const newSocket = io('https://trivia-wars-production.up.railway.app', {
+      transports: ['websocket'],
+      secure: true,
+    });
+
     setSocket(newSocket);
 
-    // Rejoin lobby on reconnect
     newSocket.on('connect', () => {
       const savedName = localStorage.getItem('displayName');
       const savedLobby = localStorage.getItem('lobbyCode');
@@ -19,6 +22,10 @@ export const SocketProvider = ({ children }) => {
       if (savedName && savedLobby) {
         newSocket.emit('join_room', savedLobby, savedName);
       }
+    });
+
+    newSocket.on('connect_error', (err) => {
+      console.error('❌ Socket connection error:', err.message);
     });
 
     return () => newSocket.disconnect();
