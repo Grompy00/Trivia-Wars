@@ -14,10 +14,12 @@ app.use(cors({
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ['https://triviawars.xyz', 'https://grompy00.github.io'],
+    origin: ['https://triviawars.xyz', 'https://grompy00.github.io', 'https://www.triviawars.xyz'],
     methods: ['GET', 'POST']
   }
 });
+app.get('/health', (req, res) => res.sendStatus(200));
+
 
 let allQuestions = [];
 const playersByRoom = {};
