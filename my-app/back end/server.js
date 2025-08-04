@@ -31,6 +31,14 @@ const scoresByRoom = {};
   allQuestions = await getDataFromDatabase();
 })();
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 function getNextQuestion(roomCode) {
   const asked = questionsAskedByRoom[roomCode] || [];
   const categories = playersByRoom[roomCode]?.categories || ["All"];
@@ -63,10 +71,17 @@ function getNextQuestion(roomCode) {
   const rawQuestion = filteredQuestions[index];
   if (!rawQuestion) return null; // Prevent crash
 
+  // Get choices and correct answer
+  const choices = rawQuestion.choices || rawQuestion.questionChoices;
+  const correct = rawQuestion.answer || rawQuestion.questionAnswer;
+
+  // Shuffle choices
+  const shuffledChoices = shuffleArray([...choices]);
+
   const question = {
     question: rawQuestion.question,
-    questionChoices: rawQuestion.choices || rawQuestion.questionChoices,
-    questionAnswer: rawQuestion.answer || rawQuestion.questionAnswer,
+    questionChoices: shuffledChoices,
+    questionAnswer: correct,
     questionNumber: questionsAskedByRoom[roomCode].length,
     questionLimit: playersByRoom[roomCode].questionLimit || 10,
     category: rawQuestion.category
@@ -74,7 +89,6 @@ function getNextQuestion(roomCode) {
   currentQuestionByRoom[roomCode] = question;
   return question;
 }
-
 io.on('connection', (socket) => {
   socket.on('create_lobby', (roomCode, displayName, questionLimit, categories = ["All"]) => {
     socket.join(roomCode);
